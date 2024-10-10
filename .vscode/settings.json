@@ -1,0 +1,94 @@
+{
+  // File exclusions
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.github": true,
+    "**/.gitp*": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.vscode": true,
+    "**/core.Microsoft*": true,
+    "**/core.mongo*": true,
+    "**/core.python*": true,
+    "**/CVS": true,
+    "pyproject.toml": true,
+    ".ruff_cache": true
+  },
+
+  // Default formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Python-specific settings
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+
+  // HTML and template languages settings
+  "[html][django-html][handlebars][hbs][mustache][jinja][jinja-html][nj][njk][nunjucks][twig]": {
+    "editor.defaultFormatter": "monosans.djlint"
+  },
+
+  // Markdown settings
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.suggestSelection": "first",
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "all",
+    "files.trimTrailingWhitespace": true
+  },
+
+  // Prettier settings
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "all",
+  "prettier.arrowParens": "always",
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.endOfLine": "lf",
+
+  // Auto-save settings
+  "files.autoSave": "afterDelay",
+
+  // ESLint settings
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.options": {
+    "extensions": [".js", ".jsx", ".ts", ".tsx"]
+  },
+
+  // Disable built-in formatters
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+
+  // CSS settings
+  "css.lint.unknownAtRules": "ignore",
+
+  // Emmet settings
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+
+  // Workspace settings
+  "workbench.iconTheme": "material-icon-theme",
+  "git.autofetch": true,
+  "explorer.confirmDragAndDrop": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.inlineSuggest.suppressSuggestions": true
+}
