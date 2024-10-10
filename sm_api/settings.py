@@ -39,6 +39,11 @@ else:
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
+# Cloudinary settings
+CLOUDINARY_STORAGE = {'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')}
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,7 +55,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'cloudinary_storage',
     'django.contrib.sites',
+    'cloudinary',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -58,6 +65,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'core',
 ]
+
+SITE_ID = 1
 
 # Middleware
 MIDDLEWARE = [
@@ -98,14 +107,12 @@ if 'DEV' in os.environ:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        },
     }
-    print('Development database. Using SQLite.')
 else:
     DATABASES = {
         'default': dj_database_url.config(default=os.getenv('DATABASE_URL')),
     }
-    print('Production database. Using PostgreSQL.')
 
 # CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
@@ -147,7 +154,7 @@ REST_FRAMEWORK = {
             'rest_framework.authentication.SessionAuthentication'
             if 'DEV' in os.environ
             else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
-        )
+        ),
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 12,

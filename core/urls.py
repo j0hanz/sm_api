@@ -1,11 +1,8 @@
-from django.http import HttpResponse
 from django.urls import path
 
-
-def dummy_view(request):
-    return HttpResponse('Hello World!')
-
+from .views import ProfileDetail, ProfileList
 
 urlpatterns = [
-    path('', dummy_view),
+    path('', ProfileList.as_view(), name='profile-list'),
+    path('<int:pk>/', ProfileDetail.as_view(), name='profile-detail'),
 ]
