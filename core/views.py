@@ -21,14 +21,16 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def perform_update(self, serializer) -> None:
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
 
 class GameList(generics.ListCreateAPIView):
     """List all games or create a new game."""
 
-    queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+    def get_queryset(self):
+        return Game.objects.filter(player=self.request.user)
 
     def perform_create(self, serializer) -> None:
         serializer.save(player=self.request.user)
@@ -39,3 +41,4 @@ class GameDetail(generics.RetrieveAPIView):
 
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+    permission_classes = [IsOwnerOrReadOnly]
