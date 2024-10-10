@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import Profile
+from .models import Game, Profile
 
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    """Admin View for Profile"""
+    """Admin view for the Profile model."""
 
     list_display = (
         'owner',
@@ -35,6 +35,51 @@ class ProfileAdmin(admin.ModelAdmin):
             'Timestamps',
             {
                 'fields': ('created_at', 'updated_at'),
+                'classes': ('collapse',),
+            },
+        ),
+    )
+
+
+@admin.register(Game)
+class GameAdmin(admin.ModelAdmin):
+    """Admin view for the Game model."""
+
+    list_display = (
+        'player',
+        'score',
+        'words_attempted',
+        'words_correct',
+        'difficulty',
+        'streak',
+        'date_played',
+    )
+    list_filter = ('difficulty', 'date_played')
+    search_fields = ['player__username']
+    readonly_fields = ('date_played',)
+
+    fieldsets = (
+        (
+            None,
+            {
+                'fields': (
+                    'player',
+                    'score',
+                    'words_attempted',
+                    'words_correct',
+                ),
+            },
+        ),
+        (
+            'Game Details',
+            {
+                'fields': ('time_played', 'difficulty', 'streak'),
+            },
+        ),
+        (
+            'Timestamp',
+            {
+                'fields': ('date_played',),
                 'classes': ('collapse',),
             },
         ),

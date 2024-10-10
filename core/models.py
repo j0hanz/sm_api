@@ -26,6 +26,32 @@ class Profile(models.Model):
         return f"{self.owner.username}'s profile"
 
 
+class Game(models.Model):
+    """Game model for storing game data."""
+
+    player = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='games',
+    )
+    score = models.IntegerField(default=0)
+    words_attempted = models.IntegerField(default=0)
+    words_correct = models.IntegerField(default=0)
+    time_played = models.DurationField()
+    difficulty = models.CharField(
+        max_length=20,
+        choices=[('EASY', 'Easy'), ('MEDIUM', 'Medium'), ('HARD', 'Hard')],
+    )
+    streak = models.IntegerField(default=0)
+    date_played = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date_played']
+
+    def __str__(self) -> str:
+        return f"{self.player.username}'s game on {self.date_played}"
+
+
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs) -> None:
     if created:

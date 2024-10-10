@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import Profile
+from .models import Game, Profile
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -27,4 +27,24 @@ class ProfileSerializer(serializers.ModelSerializer):
             'highest_streak',
             'created_at',
             'updated_at',
+        ]
+
+
+class GameSerializer(serializers.ModelSerializer):
+    """Serializer for the Game model."""
+
+    player = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Game
+        fields = [
+            'id',
+            'player',
+            'score',
+            'words_attempted',
+            'words_correct',
+            'time_played',
+            'difficulty',
+            'streak',
+            'date_played',
         ]
