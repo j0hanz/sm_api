@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    """Profile model for storing user profile data"""
+    """Profile model for storing user profile data."""
 
     owner = models.OneToOneField(
         User,
