@@ -48,3 +48,4 @@ class GameSerializer(serializers.ModelSerializer):
             'streak',
             'date_played',
         ]
+        read_only_fields = ['player', 'date_played']
