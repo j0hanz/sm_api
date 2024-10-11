@@ -30,12 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'cloudinary',
-    'cloudinary_storage',
     'corsheaders',
     'dj_rest_auth',
     'dj_rest_auth.registration',
@@ -86,10 +86,12 @@ if 'DEV' in os.environ:
             'NAME': BASE_DIR / 'db.sqlite3',
         },
     }
+    print('Development')
 else:
     DATABASES = {
         'default': dj_database_url.config(default=os.getenv('DATABASE_URL')),
     }
+    print('Production')
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
